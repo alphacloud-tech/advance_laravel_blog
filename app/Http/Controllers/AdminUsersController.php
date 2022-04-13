@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminUsersRequest;
+use App\Models\Photo;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,27 @@ class AdminUsersController extends Controller
         //
         // return $request->all(); // for testing
 
-        User::create($request->all());
+        // User::create($request->all());
+
+        $input = $request->all();
+
+        if ($file_data = $request->file('photo_id')) {
+            # code...
+            // return "its workin"; // testing
+            $name = time() . $file_data->getClientOriginalName();
+            $file_data->move("images", $name);
+
+            // create a photo to db if exist
+            $photo = Photo::create(['file'=> $name]);
+
+            // saving photo id insde users table
+            $input['photo_id'] = $photo->id;
+        }
+
+        // hashin password field in db
+        $input['password'] = bcrypt($request->password);
+        
+        User::create($input);
 
         return redirect("/admin/users");
 
