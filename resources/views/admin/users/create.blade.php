@@ -27,17 +27,19 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('password', 'Password') !!}
-            {!! Form::password('password' , ['class'=>'form-control']) !!}
-        </div>
-
-        <div class="form-group">
             {!! Form::label('photo_id', 'User image') !!}
             {!! Form::file('photo_id') !!}
         </div>
 
+
         <div class="form-group">
-            {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
+            {!! Form::label('password', 'Password') !!}
+            {!! Form::password('password',  ['class'=>'form-control']) !!}
+        </div>
+
+
+        <div class="form-group">
+            {!! Form::submit('Create User', ['class'=>'btn btn-primary col-md-12']) !!}
         </div>
         
     {!! Form::close() !!}

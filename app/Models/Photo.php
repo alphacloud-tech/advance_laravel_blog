@@ -9,4 +9,11 @@ class Photo extends Model
 {
     use HasFactory;
     protected $fillable = ['file'];
+
+    protected $upload = "/images/";
+
+
+    public function getFileAttribute ($photo) {
+        return $this->upload . $photo;
+    }
 }
