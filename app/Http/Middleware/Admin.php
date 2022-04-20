@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Console\RetryCommand;
+use Illuminate\Support\Facades\Auth;
 
 class Admin
 {
@@ -16,6 +18,19 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+
+        if (Auth::check()) { // check is user is  login or not
+            # code...
+            if (Auth::user()->isAdmin()) { // check the validation
+                # code...
+                return $next($request);
+            }
+        }
+
+        // abort(404);
+        return redirect(404);
+        // return redirect('/');
+
+        
     }
 }
