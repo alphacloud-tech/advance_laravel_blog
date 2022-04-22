@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminUsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware'=>'admin'], function () {
     Route::resource('admin/users', AdminUsersController::class);
+    Route::resource('admin/posts', AdminPostsController::class);
 });
 
 

@@ -16,4 +16,5 @@ class Photo extends Model
     public function getFileAttribute ($photo) {
         return $this->upload . $photo;
     }
+    
 }
